@@ -6,14 +6,17 @@ setInterval(() => {
 
     const titulo = video.innerText.toLowerCase();
     const thumbnail = video.querySelector('img');
-    const isExcluido = titulo.includes("vídeo indisponível") || titulo.includes("vídeo excluído") || !thumbnail;
+    const isExcluido = titulo.includes("vídeo indisponível") 
+                    || titulo.includes("vídeo excluído") 
+                    || titulo.includes("vídeo privado")  // adicionado aqui
+                    || !thumbnail;
 
     if (isExcluido) {
       const botaoRemover = video.querySelector('ytd-menu-renderer tp-yt-paper-item');
 
       if (botaoRemover) {
         botaoRemover.click();
-        console.log("🗑 Removido vídeo excluído.");
+        console.log("🗑 Removido vídeo excluído ou privado.");
       } else {
         // Tenta abrir o menu e buscar "Remover"
         const menuBtn = video.querySelector('#primary button');
